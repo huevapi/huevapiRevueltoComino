@@ -14,11 +14,11 @@ class MainApp(webapp.RequestHandler):
         
         sites = [
         'emol.com',
-        'latercera.com',
-        'cooperativa.cl',
-        'nacion.cl',
-        'elmostrador.cl',
-        'terra.cl',
+        #'latercera.com',
+        #'cooperativa.cl',
+        #'nacion.cl',
+        #'elmostrador.cl',
+        #'terra.cl',
         ]
         
         for site in sites :
@@ -30,10 +30,12 @@ class MainApp(webapp.RequestHandler):
             tweets = json['results']
             
             for tweet in tweets :
-                #matches = re.search("\b(([\w-]+://?|www[.])[^\s()<>]+(?:\([\w\d]+\)|([^[:punct:]\s]|/)))", tweet)
-                
-                #for match in matches :
-                #    self.response.out.write(match)
-                    
+                urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', tweet['text'])
+
+                for url in urls :
+                     response = urllib2.urlopen(url) # Some shortened url
+		     url_destination = response.url
+                     self.response.out.write(url_destination)
+
                 self.response.out.write(tweet['text'])
                 self.response.out.write("<br /><be />")
