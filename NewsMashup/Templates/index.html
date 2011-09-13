@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Huevapi Revuelto</title>
+<style type="text/css">
+.title {
+	width: 700px;
+	text-align: center;
+}
+#tier1news .left {
+	border: 1px #000 solid;
+	width: 300px;
+	height: 300px;
+	float: left;
+	overflow: hidden;
+	font-size: 14pt;
+}
+#tier1news  a {
+	font-size: 20pt;
+	font-weight: bold;
+}
+#tier1news .right {
+	border: 1px #000 solid;
+	width: 300px;
+	height: 300px;
+	float: left;
+	margin-left: 10px;
+	overflow: hidden;
+	font-size: 14pt;
+}
+#tier2news .left {
+	border: 1px #000 solid;
+	width: 300px;
+	height: 200px;
+	float: left;
+	overflow: hidden;
+}
+#tier2news .right {
+	border: 1px #000 solid;
+	width: 300px;
+	height: 200px;
+	float: left;
+	margin-left: 10px;
+	overflow: hidden;
+}
+#tier2news a {
+	font-size: 16pt;
+	font-weight: bold;
+}
+#tier3news .left {
+	border: 1px #000 solid;
+	width: 300px;
+	height: 100px;
+	float: left;
+	overflow: hidden;
+}
+#tier3news .right {
+	border: 1px #000 solid;
+	width: 300px;
+	height: 100px;
+	float: left;
+	margin-left: 10px;
+	overflow: hidden;
+}
+#tier3news a {
+	font-size: 14pt;
+	font-weight: bold;
+}
+#tier4news .left {
+	border: 1px #000 solid;
+	width: 300px;
+	height: 100px;
+	float: left;
+	overflow: hidden;
+}
+#tier4news .right {
+	border: 1px #000 solid;
+	width: 300px;
+	height: 100px;
+	float: left;
+	margin-left: 10px;
+	overflow: hidden;
+}
+#tier4news a {
+	font-size: 10pt;
+}
+.clear {
+	clear: both;
+}
+
+</style>
+<script type="text/javascript" src="js/jquery-1.6.3.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	var newsSource = "sample.json";
+	
+	$.ajax({
+		url: newsSource,
+		dataType: "json",
+		success: function(data) {
+			$.each(data, function(index, newsItem) {
+				switch(index) {
+					case 0:
+						var html = "<li><a href=\"" + newsItem.url + "\">" + newsItem.title + "</a>";
+						html += "<br>" + newsItem.summary.substring(0, 400) + ((newsItem.summary.length > 400) ? "..." : "") + "</li>";
+						$("#tier1left").append(html);
+						break;
+					case 1:
+						var html = "<li><a href=\"" + newsItem.url + "\">" + newsItem.title + "</a>";
+						html += "<br>" + newsItem.summary.substring(0, 400) + ((newsItem.summary.length > 400) ? "..." : "") + "</li>";
+						$("#tier1right").append(html);
+						break;
+					case 2:
+					case 3:
+						var html = "<li><a href=\"" + newsItem.url + "\">" + newsItem.title + "</a>";
+						html += "<br>" + newsItem.summary.substring(0, 150) + ((newsItem.summary.length > 150) ? "..." : "") + "</li>";
+						$("#tier2left").append(html);
+						break;
+					case 4:
+					case 5:
+						var html = "<li><a href=\"" + newsItem.url + "\">" + newsItem.title + "</a>";
+						html += "<br>" + newsItem.summary.substring(0, 150) + ((newsItem.summary.length > 150) ? "..." : "") + "</li>";
+						$("#tier2right").append(html);
+						break;
+					case 6:
+					case 7:
+					case 8:
+						var html = "<li><a href=\"" + newsItem.url + "\">" + newsItem.title + "</a></li>";
+						$("#tier3left").append(html);
+						break;
+					case 9:
+					case 10:
+					case 11:
+						var html = "<li><a href=\"" + newsItem.url + "\">" + newsItem.title + "</a></li>";
+						$("#tier3right").append(html);
+						break;
+					case 12:
+					case 13:
+					case 14:
+					case 15:
+						var html = "<li><a href=\"" + newsItem.url + "\">" + newsItem.title + "</a></li>";
+						$("#tier4left").append(html);
+						break;
+					case 16:
+					case 17:
+					case 18:
+					case 19:
+						var html = "<li><a href=\"" + newsItem.url + "\">" + newsItem.title + "</a></li>";
+						$("#tier4right").append(html);
+						break;
+					default:
+						return;
+				}
+			});
+		}
+	});
+});
+</script>
+</head>
+<body>
+	<h1 class="title">News Mashup</h1>
+	<div id="tier1news">
+		<ul id="tier1left" class="left"></ul>
+		<ul id="tier1right" class="right"></ul>
+	</div>
+	<div class="clear"></div>
+	<div id="tier2news">
+		<ul id="tier2left" class="left"></ul>
+		<ul id="tier2right" class="right"></ul>
+	</div>
+	<div class="clear"></div>
+	<div id="tier3news">
+		<ul id="tier3left" class="left"></ul>
+		<ul id="tier3right" class="right"></ul>
+	</div>
+	<div class="clear"></div>
+	<div id="tier4news">
+		<ul id="tier4left" class="left"></ul>
+		<ul id="tier4right" class="right"></ul>
+	</div>
+</body>
+</html>
